@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test page</title>
+</head>
+<body>
+<h2>Telegram Web Apps Features:</h2>
+MainButton<button onclick="toggleMainButtonVisibility()">Main button</button><br><br>
+BackButton<button onclick="toggleBackButtonVisibility()">Back button</button><br><br>
+PopupButton<button id="openPopupButton">Open Popup</button><br><br>
+
+<button onclick="Telegram.WebApp.sendData('Test Data!')">Test button</button><br><br>
+
+<button onclick="myFunction()">Copy WebApp Object</button><br><br>
+ScanQrPopupParams<button id="scanQRButton">Scan QR Code</button><br><br>
+
+<h3>HapticFeedback</h3>
+<h4>impactOccurred</h4>
+<button onclick="Telegram.WebApp.HapticFeedback.impactOccurred('light')">light</button><br>
+<button onclick="Telegram.WebApp.HapticFeedback.impactOccurred('medium')">medium</button><br>
+<button onclick="Telegram.WebApp.HapticFeedback.impactOccurred('heavy')">heavy</button><br>
+<button onclick="Telegram.WebApp.HapticFeedback.impactOccurred('rigid')">rigid</button><br>
+<button onclick="Telegram.WebApp.HapticFeedback.impactOccurred('soft')">soft</button><br>
+<h4>notificationOccurred</h4>
+<button onclick="Telegram.WebApp.HapticFeedback.notificationOccurred('error')">error</button><br>
+<button onclick="Telegram.WebApp.HapticFeedback.notificationOccurred('success')">success</button><br>
+<button onclick="Telegram.WebApp.HapticFeedback.notificationOccurred('warning')">warning</button><br>
+<h4>selectionChanged</h4>
+<button onclick="Telegram.WebApp.HapticFeedback.selectionChanged()">selectionChanged</button><br>
+
+
+<script>
+
+  function toggleMainButtonVisibility() {
+    Telegram.WebApp.MainButton.isVisible?Telegram.WebApp.MainButton.hide():Telegram.WebApp.MainButton.show();
+  }
+  function toggleBackButtonVisibility() {
+    Telegram.WebApp.BackButton.isVisible?Telegram.WebApp.BackButton.hide():Telegram.WebApp.BackButton.show();
+  }
+
+  function myFunction() {
+    var copyText = JSON.stringify(window.Telegram.WebApp);
+    navigator.clipboard.writeText(copyText);
+    alert("Copied window.Telegram.WebApp Object")
+
+  }
+  // Define your callback function
+  function handleQRCodeScanned(qrText) {
+    // Handle the QR code text here
+    console.log("QR code scanned: " + qrText);
+
+    // Close the QR code scanning popup if needed
+    if (qrText === "desiredText") {
+      return true; // This will close the popup
+    }
+  }
+
+  // Function to open the QR scanner popup
+  function openQRScannerPopup() {
+    const scanQrPopupParams = {
+      "text" : "Check how it works"
+      // Define parameters for the QR code scanning popup
+      // These parameters should be specified as required by your platform or library
+      // For example, you might set the popup title, message, and other UI details here.
+    };
+
+    // Call the showScanQrPopup method with the specified parameters and callback
+    window.Telegram.WebApp.showScanQrPopup(scanQrPopupParams, handleQRCodeScanned);
+  }
+
+  // Define your callback function
+  function handlePopupClosed(buttonId) {
+    // Handle the popup being closed
+    console.log("Popup closed. Button ID: " + buttonId);
+  }
+
+  // Function to open the popup
+  function openPopup() {
+    const popupParams = {
+      // Define parameters for the popup
+      title: "Popup Title",
+      message: "This is a popup message. Click a button below.",
+      buttons: [
+        {
+          id: "button1",
+          type: "default",
+          text: "Default",
+        },
+        {
+          id: "button2",
+          type: "ok"
+        },
+        {
+          id: "button2",
+          type: "destructive",
+          text: "Remove"
+        }
+      ]
+    };
+
+    // Call the showPopup method with the specified parameters and callback
+    Telegram.WebApp.showPopup(popupParams, handlePopupClosed);
+  }
+
+  // Attach an event handler to the button
+  const scanQRButton = document.getElementById("scanQRButton");
+  scanQRButton.addEventListener("click", openQRScannerPopup);
+  const openPopupButton = document.getElementById("openPopupButton");
+  openPopupButton.addEventListener("click", openPopup);
+</script>
+<!--
+<a target="_blank" href="https://community.servicenow.com/community?id=community_user_profile&user=4f8156e9db981fc09c9ffb651f961943">ServiceNow Community Profile</a><br>
+<a target="_blank" href="https://github.com/bardackov">GitHub</a><br>
+<a target="_blank" href="https://www.youtube.com/user/bardackov">YouTube</a><br>
+<a target="_blank" href="https://t.me/bardackov">Telegram</a><br>
+<a target="_blank" href="https://twitter.com/bardackov">Twitter</a><br>
+<a target="_blank" href="https://www.linkedin.com/in/bardakov/">LinkedIn</a><br>
+<a target="_blank" href="https://www.facebook.com/bardackov">Facebook</a><br>
+<a target="_blank" href="https://www.instagram.com/bardackov/">Instagram</a><br>
+<a href="mailto:viktor@bardakov.com">Email</a><br><br>
+<a href="CryptoKitty2.pkpass" download><img src = "Add_to_Apple_Wallet_rgb_US-UK.svg" alt="Add to Apple Wallet"/></a>
+
+<h2>Projects</h2>
+<a target="_blank" href="http://sc.bardakov.com">ServiceNow Service Catalog Telegram Bot</a><br>
+<a target="_blank" href="#">ServiceNow Service Catalog Amazon Alexa Skill (APL)</a><br>
+<a target="_blank" href="http://nft2pass.bardakov.com">Add NFT to Apple Wallet</a><br>
+-->
+<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="ChessioBot" data-size="large" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
+<script type="text/javascript">
+  function onTelegramAuth(user) {
+    alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
+  }
+</script>
+</body>
+
+</html>
