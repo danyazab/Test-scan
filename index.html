@@ -53,6 +53,15 @@ ScanQrPopupParams<button id="scanQRButton">Scan QR Code</button><br><br>
     // Handle the QR code text here
     console.log("QR code scanned: " + qrText);
 
+    const scanQr = {
+      "text" : "Check how it works"
+      // Define parameters for the QR code scanning popup
+      // These parameters should be specified as required by your platform or library
+      // For example, you might set the popup title, message, and other UI details here.
+    };
+
+    // Call the showScanQrPopup method with the specified parameters and callback
+    window.Telegram.WebApp.showScanQrPopup(scanQr,qrText);
     // Close the QR code scanning popup if needed
     if (qrText === "desiredText") {
       return true; // This will close the popup
