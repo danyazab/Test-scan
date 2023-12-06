@@ -1,126 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test page</title>
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0">
+  <meta http-equiv="X-Ua-Compatible", content="ie=edge" >
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <title>Shop</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2&family=Montserrat:wgh@200;500&display=swap');
+
+    * {margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body{
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 200;
+      color: var(--tg-theme-text-color);
+      background: var(--tg-theme-bg-color);
+    }
+
+    #main {
+      width: 100%;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 50px;
+      margin-bottom: 10px;
+    }
+    img{
+      width: 350px;
+      margin: 0 auto;
+    }
+    button{
+      border: 0;
+      border-radius: 5px;
+      margin-top: 50px;
+      height: 60px;
+      width: 200px;
+      font-size: 20px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 500ms ease;
+      color: var(--tg-theme-button-color);
+      background: var(--tg-theme-button-text-color);
+    }
+    button:hover{
+      background: var(--tg-theme-secondary-bg-color)
+    }
+
+  </style>
 </head>
 <body>
-<h2>Telegram Web Apps Features:</h2>
-MainButton<button onclick="toggleMainButtonVisibility()">Main button</button><br><br>
-BackButton<button onclick="toggleBackButtonVisibility()">Back button</button><br><br>
-PopupButton<button id="openPopupButton">Open Popup</button><br><br>
+<div id="main">
+  <h1>Магазин</h1>
+  <p>BIGUKHN?EI EUIDH UIHDUI uuiejiv3hui4fo4322 frbtb</p>
+  <button id="buy">Купити</button>
 
-<button onclick="Telegram.WebApp.sendData('Test Data!')">Test button</button><br><br>
+</div>
+<div class="usercard" id="usercard">
 
-<button onclick="myFunction()">Copy WebApp Object</button><br><br>
-ScanQrPopupParams<button id="scanQRButton">Scan QR Codess</button><br><br>
+</div>
 
-<h3>HapticFeedback</h3>
-<h4>impactOccurred</h4>
-<button onclick="Telegram.WebApp.HapticFeedback.impactOccurred('medium')">medium</button><br>
-<button onclick="Telegram.WebApp.HapticFeedback.impactOccurred('heavy')">heavy</button><br>
-<button onclick="Telegram.WebApp.HapticFeedback.impactOccurred('rigid')">rigid</button><br>
-<button onclick="Telegram.WebApp.HapticFeedback.impactOccurred('soft')">soft</button><br>
-<h4>notificationOccurred</h4>
-<button onclick="Telegram.WebApp.HapticFeedback.notificationOccurred('error')">error</button><br>
-<button onclick="Telegram.WebApp.HapticFeedback.notificationOccurred('success')">success</button><br>
-<button onclick="Telegram.WebApp.HapticFeedback.notificationOccurred('warning')">warning</button><br>
-<h4>selectionChanged</h4>
-<button onclick="Telegram.WebApp.HapticFeedback.selectionChanged()">selectionChanged</button><br>
-
-
-<script>
-
-  function toggleMainButtonVisibility() {
-    Telegram.WebApp.MainButton.isVisible?Telegram.WebApp.MainButton.hide():Telegram.WebApp.MainButton.show();
-  }
-  function toggleBackButtonVisibility() {
-    Telegram.WebApp.BackButton.isVisible?Telegram.WebApp.BackButton.hide():Telegram.WebApp.BackButton.show();
-  }
-
-  function myFunction() {
-    var copyText = JSON.stringify(window.Telegram.WebApp);
-    navigator.clipboard.writeText(copyText);
-    alert("Copied window.Telegram.WebApp Object")
-
-  }
-  // Define your callback function
-  function handleQRCodeScanned(qrText) {
-    // Handle the QR code text here
-    console.log("QR code scanned: " + qrText);
-    Telegram.WebApp.sendData(qrText)
-
-
-    // Call the showScanQrPopup method with the specified parameters and callback
-    // Close the QR code scanning popup if needed
-    if (qrText === "desiredText") {
-      return true; // This will close the popup
-    }
-  }
-
-  // Function to open the QR scanner popup
-  function openQRScannerPopup() {
-    const scanQrPopupParams = {
-      "text" : "Check how it work"
-      // Define parameters for the QR code scanning popup
-      // These parameters should be specified as required by your platform or library
-      // For example, you might set the popup title, message, and other UI details here.
-    };
-
-    // Call the showScanQrPopup method with the specified parameters and callback
-    window.Telegram.WebApp.showScanQrPopup(scanQrPopupParams, handleQRCodeScanned);
-  }
-
-  // Define your callback function
-  function handlePopupClosed(buttonId) {
-    // Handle the popup being closed
-    console.log("Popup closed. Button ID: " + buttonId);
-  }
-
-  // Function to open the popup
-  function openPopup() {
-    const popupParams = {
-      // Define parameters for the popup
-      title: "Popup Title",
-      message: "This is a popup message. Click a button below.",
-      buttons: [
-        {
-          id: "button1",
-          type: "default",
-          text: "Default",
-        },
-        {
-          id: "button2",
-          type: "ok"
-        },
-        {
-          id: "button2",
-          type: "destructive",
-          text: "Remove"
-        }
-      ]
-    };
-
-    // Call the showPopup method with the specified parameters and callback
-    Telegram.WebApp.showPopup(popupParams, handlePopupClosed);
-  }
-
-  // Attach an event handler to the button
-  const scanQRButton = document.getElementById("scanQRButton");
-  scanQRButton.addEventListener("click", openQRScannerPopup);
-  const openPopupButton = document.getElementById("openPopupButton");
-  openPopupButton.addEventListener("click", openPopup);
-</script>
-
-<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="ChessioBot" data-size="large" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
-<script type="text/javascript">
-  function onTelegramAuth(user) {
-    alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
-  }
-</script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="app.js"></script>
 </body>
-
 </html>
