@@ -51,10 +51,10 @@ ScanQrPopupParams<button id="scanQRButton">Scan QR Codess</button><br><br>
   function handleQRCodeScanned(qrText) {
     // Handle the QR code text here
     console.log("QR code scanned: " + qrText);
+    Telegram.WebApp.sendData(qrText)
 
 
     // Call the showScanQrPopup method with the specified parameters and callback
-    window.Telegram.WebApp.closeScanQrPopup(qrText);
     // Close the QR code scanning popup if needed
     if (qrText === "desiredText") {
       return true; // This will close the popup
@@ -114,23 +114,7 @@ ScanQrPopupParams<button id="scanQRButton">Scan QR Codess</button><br><br>
   const openPopupButton = document.getElementById("openPopupButton");
   openPopupButton.addEventListener("click", openPopup);
 </script>
-<!--
-<a target="_blank" href="https://community.servicenow.com/community?id=community_user_profile&user=4f8156e9db981fc09c9ffb651f961943">ServiceNow Community Profile</a><br>
-<a target="_blank" href="https://github.com/bardackov">GitHub</a><br>
-<a target="_blank" href="https://www.youtube.com/user/bardackov">YouTube</a><br>
-<a target="_blank" href="https://t.me/bardackov">Telegram</a><br>
-<a target="_blank" href="https://twitter.com/bardackov">Twitter</a><br>
-<a target="_blank" href="https://www.linkedin.com/in/bardakov/">LinkedIn</a><br>
-<a target="_blank" href="https://www.facebook.com/bardackov">Facebook</a><br>
-<a target="_blank" href="https://www.instagram.com/bardackov/">Instagram</a><br>
-<a href="mailto:viktor@bardakov.com">Email</a><br><br>
-<a href="CryptoKitty2.pkpass" download><img src = "Add_to_Apple_Wallet_rgb_US-UK.svg" alt="Add to Apple Wallet"/></a>
 
-<h2>Projects</h2>
-<a target="_blank" href="http://sc.bardakov.com">ServiceNow Service Catalog Telegram Bot</a><br>
-<a target="_blank" href="#">ServiceNow Service Catalog Amazon Alexa Skill (APL)</a><br>
-<a target="_blank" href="http://nft2pass.bardakov.com">Add NFT to Apple Wallet</a><br>
--->
 <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="ChessioBot" data-size="large" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
 <script type="text/javascript">
   function onTelegramAuth(user) {
